@@ -4,8 +4,7 @@ Simple game about eating smaller platypus and avoid being eaten by bigger ones.
 Requirements:
 - Python 2.7
 - Pygame
-
-All project files (code and images) should be located in the same folder. Run init.py to start the game.
+- All project files (code and images) should be located in the same folder. Run init.py to start the game.
 
 A little explanation about what is inside each file:
 - main.py: Main loop of the game. It renders the background, the player character and the enemies. It also checks for collisions between player and enemies and reads player input.
