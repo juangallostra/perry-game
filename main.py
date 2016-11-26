@@ -1,7 +1,7 @@
 
 import pygame
 import perry
-import control
+import helper
 import enemy
 import random
 
@@ -44,7 +44,7 @@ while running:
             smaller=True
         else:
             smaller=False
-    #in case there is no smaller enemy, create one
+    # In case there is no smaller enemy, create one
     if smaller==False:
         size=(PERRY.size[0]-PERRY.size[0]/10,PERRY.size[1]-PERRY.size[1]/10)
         enemies.add(enemy.Enemy('perry.png',size))
@@ -81,7 +81,7 @@ while running:
     col_list=pygame.sprite.spritecollide(PERRY,enemies,True)
     col=False
     for enem in col_list:
-        if control.eating(PERRY,enem)==True:
+        if helper.eating(PERRY,enem)==True:
             PERRY.grow(enem)
             col=True
         else:
@@ -89,11 +89,12 @@ while running:
             enemies.add(enem)
             
 
-    # Screen update, which contains two branches: Keep playing or losing the game. Eaten is the flag to control the conditional.
+    # Screen update, which contains two branches: Keep playing or losing the game.
+    # Eaten is the flag to control the conditional and program flow.
 
     # Game over (case eaten).
     if eaten==True:
-        control.draw_loser(BACK,'loser_1.png',(1152,640))
+        helper.draw_loser(BACK,'loser_1.png',(1152,640))
         pygame.display.flip()
         while eaten==True:
             for event in pygame.event.get(): # Check for events and act in accordance
@@ -111,11 +112,11 @@ while running:
                     running=False
     # Keep playing (case no collision or enemy eaten)
     else:
-        control.draw_background(BACK,'grass4.png',(1152,640))
-        control.draw_character(BACK,PERRY)
+        helper.draw_background(BACK,'grass4.png',(1152,640))
+        helper.draw_character(BACK,PERRY)
         for enem in enemies:
             enem.move()
-            control.draw_character(BACK,enem)
+            helper.draw_character(BACK,enem)
         pygame.display.flip()
     
 
