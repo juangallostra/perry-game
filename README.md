@@ -8,7 +8,7 @@ Simple game about eating smaller platypus and avoid being eaten by bigger ones.
 
 ## Files
 A little explanation about what is inside each file:
-- main.py: Main loop of the game. It renders the background, the player character and the enemies. It also checks for collisions between player and enemies and reads player input.
-- perry.py: File that holds the class of the player's character. It just contains the class, which inherits from pygame.sprite.Sprite, with its attributes and methods.
-- enemy.py: File that holds the class of the enemies. It just contains the class, which inherits from pygame.sprite.Sprite, with its attributes, methods, and enemy AI.
-- helper.py: Contains several functions that are called in the main loop. It mainly improves readability 
+- ```main.py```: Main loop of the game. It renders the background, the player character and the enemies. It also checks for collisions between player and enemies and reads player input.
+- ```perry.py```: File that holds the class of the player's character. It just contains the class, which inherits from pygame.sprite.Sprite, with its attributes and methods.
+- ```enemy.py```: File that holds the class of the enemies. It just contains the class, which inherits from pygame.sprite.Sprite, with its attributes, methods, and enemy AI.
+- ```helper.py```: Contains several functions that are called in the main loop. It mainly improves readability 
