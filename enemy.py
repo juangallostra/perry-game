@@ -1,3 +1,5 @@
+# TODO: redefine magic numbers as constants
+
 import pygame
 import random
 
