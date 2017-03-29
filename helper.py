@@ -4,6 +4,9 @@ import enemy
 import random
 
 
+## CONSTANTS
+TILE_SIZE = 64 
+
 ## HELPER FUNCTIONS
 
 
@@ -16,9 +19,9 @@ def draw_background(BACK,a,size):
     while x<size[0]:
         while y<size[1]:
             background.blit(TILE,(x,y))	# Tile size is 64x64
-            y+=64				
+            y+=TILE_SIZE				
         y=0
-        x+=64
+        x+=TILE_SIZE
     BACK.blit(background,(0,0))
 
 
