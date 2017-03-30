@@ -10,27 +10,30 @@ class Enemy(pygame.sprite.Sprite):
     This class is the enemy class which inherits from pygame.sprite.Sprite class
     '''
     # Class initialization
-    def __init__(self,a,size): 
+    def __init__(self, enemy_img, size, game_window_x, game_window_y): 
         pygame.sprite.Sprite.__init__(self)
-        self.image=pygame.image.load(a).convert() # Load enemy image
-        self.image=pygame.transform.scale(self.image,size) # Enemy size
+        self.image = pygame.image.load(enemy_img).convert() # Load enemy image
+        self.image = pygame.transform.scale(self.image,size) # Enemy size
         self.image.set_colorkey((255,255,255)) # Turns white in the image to transparent
-        self.rect=self.image.get_rect() # Get position of the enemy
-        self.size=self.image.get_size() # Get size of the enemy
-        self.direction=[random.random()*random.choice([1,-1]),random.random()*random.choice([1,-1])] #movement direction
+        self.rect = self.image.get_rect() # Get position of the enemy
+        self.size = self.image.get_size() # Get size of the enemy
+        self.direction = [random.random()*random.choice([1,-1]),random.random()*random.choice([1,-1])] #movement direction
         # Starting position
-        self.x=random.random()*1000
-        self.y=random.random()*640
+        self.x = random.random()*1000
+        self.y = random.random()*640
+        # Game window size
+        self.game_window_x = game_window_x
+        self.game_window_y = game_window_y
         # Movement target
-        self.target_x=int(random.random()*1152)-self.size[0]
-        self.target_y=int(random.random()*640)-self.size[1]
+        self.target_x = int(random.random()*self.game_window_x)-self.size[0]
+        self.target_y = int(random.random()*self.game_window_x)-self.size[1]
         # Defining speed
-        self.speed=random.choice([1,2,5,7])
+        self.speed = random.choice([1,2,5,7])
         # Get sprite rectangle
-        self.rect=self.image.get_rect()
-        self.rect.x=self.x
-        self.rect.y=self.y
-        self.counter=random.randint(0,120)
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.counter = random.randint(0,120)
         # Store directions to flip sprites accordingly
         self.last_dir = 'RIGHT'
         self.last_dir_1 = 'RIGHT'
@@ -38,20 +41,20 @@ class Enemy(pygame.sprite.Sprite):
     # Redefine target, speed and direction
     def target_dir_speed(self):
         # Restart counter
-        self.counter=random.randint(0,120)
+        self.counter = random.randint(0,120)
         # Redefine target
-        self.target_x=random.randrange(0,1152-self.size[0])
-        self.target_y=random.randrange(0,640-self.size[1])
+        self.target_x = random.randrange(0,self.game_window_x-self.size[0])
+        self.target_y = random.randrange(0,self.game_window_y-self.size[1])
         # Set speed
-        self.speed=random.choice([1,2])
+        self.speed = random.choice([1,2])
         # Set direction
-        m=float(self.target_y-self.y)/float(self.target_x-self.x)
+        m = float(self.target_y-self.y)/float(self.target_x-self.x)
         while m>abs(1.73):
-            self.target_x=random.randrange(0,1152-self.size[0])
-            self.target_y=random.randrange(0,640-self.size[1])
-            m=float(self.target_y-self.y)/float(self.target_x-self.x)
+            self.target_x = random.randrange(0,self.game_window_x-self.size[0])
+            self.target_y = random.randrange(0,self.game_window_y-self.size[1])
+            m = float(self.target_y-self.y)/float(self.target_x-self.x)
 
-        self.direction=[float(self.target_x-self.x)/abs(self.target_x-self.x),(float(self.target_y-self.y)/abs(self.target_y-self.y))*m]
+        self.direction = [float(self.target_x-self.x)/abs(self.target_x-self.x),(float(self.target_y-self.y)/abs(self.target_y-self.y))*m]
 
     # Method for moving the enemy
     def move(self):
@@ -62,7 +65,7 @@ class Enemy(pygame.sprite.Sprite):
         else:
             if 0<self.x+self.direction[0]*self.speed<1152-self.size[0]:
                 self.x+=self.direction[0]*self.speed
-                self.rect.x=self.x
+                self.rect.x = self.x
                 
                 # Update facing sprite direction
                 self.last_dir = self.last_dir_1
@@ -77,7 +80,7 @@ class Enemy(pygame.sprite.Sprite):
 
             if 0<self.y+self.direction[1]*self.speed<640-self.size[1]:
                 self.y+=self.direction[1]*self.speed
-                self.rect.y=self.y
+                self.rect.y = self.y
             else:
                 self.direction[1]=-1*self.direction[1]
             self.counter-=1

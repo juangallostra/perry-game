@@ -11,17 +11,17 @@ TILE_SIZE = 64
 
 
 # Create background: Fills the background surface with tiles (64x64) of grass and blits it to the pygame display window
-def draw_background(BACK,a,size):
-    background=pygame.Surface(size)
-    TILE=pygame.image.load(a).convert()
-    x=0
-    y=0
-    while x<size[0]:
-        while y<size[1]:
+def draw_background(BACK, tile_img, size):
+    background = pygame.Surface(size)
+    TILE = pygame.image.load(tile_img).convert()
+    x = 0
+    y = 0
+    while x < size[0]:
+        while y < size[1]:
             background.blit(TILE,(x,y))	# Tile size is 64x64
-            y+=TILE_SIZE				
-        y=0
-        x+=TILE_SIZE
+            y += TILE_SIZE				
+        y = 0
+        x += TILE_SIZE
     BACK.blit(background,(0,0))
 
 
@@ -31,15 +31,14 @@ def draw_character(BACK,Player):
 
 # Draws "game over" screen
 def draw_loser(BACK,photo,size):
-    photo=pygame.image.load(photo)
-    photo=pygame.transform.scale(photo,size)
+    photo = pygame.image.load(photo)
+    photo = pygame.transform.scale(photo,size)
     BACK.blit(photo,(0,0))
     
 
 # Checks wether player eats enemey or enemy eats player
 def eating(Perry,enemy):
-
-	if Perry.size>=enemy.size: #size check
+	if Perry.size >= enemy.size: #size check
 		return True
 	else:
 		return False

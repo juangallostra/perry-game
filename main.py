@@ -8,6 +8,12 @@ import random
 
 ##------------ GAME ---------------
 
+## CONSTANTS DEFINITION
+INITIAL_X = 500
+INITIAL_Y = 500
+SPEED = 5
+SIZE_X = 1152
+SIZE_Y = 640
 ## INITIALIZATION
 
 running = True
@@ -17,8 +23,8 @@ smaller = False
 
 pygame.init()
 NE_MAX=5
-BACK=pygame.display.set_mode((1152,640))
-PERRY=perry.Perry('perry.png')
+BACK=pygame.display.set_mode((SIZE_X, SIZE_Y))
+PERRY=perry.Perry('perry.png', INITIAL_X, INITIAL_Y, SPEED)
 clock=pygame.time.Clock()
 enemies=pygame.sprite.Group()
 
@@ -35,7 +41,7 @@ while running:
     while len(enemies) < int((NE_MAX*50)/PERRY.size[0]):
         ratio=float(random.choice([-20,-10,0,20,30]))/100
         size=(PERRY.size[0]+int(ratio*PERRY.size[0]),PERRY.size[1]+int(ratio*PERRY.size[1]))
-        enemies.add(enemy.Enemy('perry.png',size))
+        enemies.add(enemy.Enemy('perry.png',size, SIZE_X, SIZE_Y))
 
     # Grow alive enemies and check for smaller enemies
     for enem in enemies:
@@ -47,7 +53,7 @@ while running:
     # In case there is no smaller enemy, create one
     if smaller==False:
         size=(PERRY.size[0]-PERRY.size[0]/10,PERRY.size[1]-PERRY.size[1]/10)
-        enemies.add(enemy.Enemy('perry.png',size))
+        enemies.add(enemy.Enemy('perry.png',size, SIZE_X, SIZE_Y))
         smaller=True
 
     # Check for events and act in accordance
@@ -103,7 +109,7 @@ while running:
                     if event.key == pygame.K_SPACE:
                         eaten = False
                         enemies = pygame.sprite.Group()
-                        PERRY=perry.Perry('perry.png')
+                        PERRY=perry.Perry('perry.png', INITIAL_X, INITIAL_Y, SPEED)
                         last_pressed_1_perry = 'RIGHT'
                         last_pressed_2_perry = 'RIGHT'
                         
@@ -112,7 +118,7 @@ while running:
                     running=False
     # Keep playing (case no collision or enemy eaten)
     else:
-        helper.draw_background(BACK,'grass4.png',(1152,640))
+        helper.draw_background(BACK,'grass4.png',(SIZE_X, SIZE_Y))
         helper.draw_character(BACK,PERRY)
         for enem in enemies:
             enem.move()
