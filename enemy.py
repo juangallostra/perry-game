@@ -79,14 +79,14 @@ class Enemy(pygame.sprite.Sprite):
                 if self.last_dir != self.last_dir_1:
                     self.image = pygame.transform.flip(self.image, True, False)
             else:
-                self.direction[0]=-1*self.direction[0]
+                self.direction[0] = -1*self.direction[0]
 
-            if 0<self.y+self.direction[1]*self.speed<640-self.size[1]:
-                self.y+=self.direction[1]*self.speed
+            if 0 < self.y+self.direction[1]*self.speed < 640-self.size[1]:
+                self.y += self.direction[1]*self.speed
                 self.rect.y = self.y
             else:
-                self.direction[1]=-1*self.direction[1]
-            self.counter-=1
+                self.direction[1] = -1*self.direction[1]
+            self.counter -= 1
 
         
 
@@ -94,15 +94,20 @@ class Enemy(pygame.sprite.Sprite):
     def grow(self,perry,flag): 
         y=random.choice([0,1])
         # Only if future size < max size and flag==collision==True and choice==1
-        if self.size[1]+int(perry.size[1]/10)<550 and flag==True and y==1:
+        if self.size[1]+int(perry.size[1]/10) < 550 and flag == True and y == 1:
            # Reload image and scale it and create new rectangle
-           self.image=pygame.image.load('perry.png').convert()
-           self.image=pygame.transform.scale(self.image,(self.size[0]+int(perry.size[0]/10),self.size[1]+int(perry.size[1]/10))) 
+           self.image = pygame.image.load('perry.png').convert()
+           self.image = pygame.transform.scale(self.image,
+                                                (
+                                                    self.size[0]+int(perry.size[0]/10),
+                                                    self.size[1]+int(perry.size[1]/10)
+                                                )
+                                              ) 
            self.image.set_colorkey((255,255,255))
-           self.rect=self.image.get_rect()
-           self.rect.x=self.x
-           self.rect.y=self.y
-           self.size=self.image.get_size()
+           self.rect = self.image.get_rect()
+           self.rect.x = self.x
+           self.rect.y = self.y
+           self.size = self.image.get_size()
 
     def flip(self):
              self.image = pygame.transform.flip(self.image, True, False)
