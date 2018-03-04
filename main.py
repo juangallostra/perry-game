@@ -22,11 +22,11 @@ col     = False
 smaller = False
 
 pygame.init()
-NE_MAX=5
-BACK=pygame.display.set_mode((SIZE_X, SIZE_Y))
-PERRY=perry.Perry('perry.png', INITIAL_X, INITIAL_Y, SPEED)
-clock=pygame.time.Clock()
-enemies=pygame.sprite.Group()
+NE_MAX = 5
+BACK = pygame.display.set_mode((SIZE_X, SIZE_Y))
+PERRY = perry.Perry('perry.png', INITIAL_X, INITIAL_Y, SPEED)
+clock = pygame.time.Clock()
+enemies = pygame.sprite.Group()
 
 last_pressed_1_perry = 'RIGHT'
 last_pressed_2_perry = 'RIGHT'
@@ -46,22 +46,22 @@ while running:
     # Grow alive enemies and check for smaller enemies
     for enem in enemies:
         enem.grow(PERRY,col)
-        if enem.size<=PERRY.size:
-            smaller=True
+        if enem.size <= PERRY.size:
+            smaller = True
         else:
-            smaller=False
+            smaller = False
     # In case there is no smaller enemy, create one
-    if smaller==False:
-        size=(PERRY.size[0]-PERRY.size[0]/10,PERRY.size[1]-PERRY.size[1]/10)
+    if smaller == False:
+        size = (PERRY.size[0]-PERRY.size[0]/10,PERRY.size[1]-PERRY.size[1]/10)
         enemies.add(enemy.Enemy('perry.png',size, SIZE_X, SIZE_Y))
-        smaller=True
+        smaller = True
 
     # Check for events and act in accordance
     for event in pygame.event.get():
 
         # Exiting the game
         if event.type == pygame.QUIT:
-            running=False
+            running = False
 
     
     # Moving the player
@@ -84,14 +84,14 @@ while running:
         PERRY.flip()
 
     # Check for collisions and, if there is any, check who eats who
-    col_list=pygame.sprite.spritecollide(PERRY,enemies,True)
-    col=False
+    col_list = pygame.sprite.spritecollide(PERRY,enemies,True)
+    col = False
     for enem in col_list:
-        if helper.eating(PERRY,enem)==True:
+        if helper.eating(PERRY,enem) == True:
             PERRY.grow(enem)
-            col=True
+            col = True
         else:
-            eaten=True
+            eaten = True
             enemies.add(enem)
             
 
@@ -99,23 +99,23 @@ while running:
     # Eaten is the flag to control the conditional and program flow.
 
     # Game over (case eaten).
-    if eaten==True:
+    if eaten == True:
         helper.draw_loser(BACK,'loser_1.png',(1152,640))
         pygame.display.flip()
-        while eaten==True:
+        while eaten == True:
             for event in pygame.event.get(): # Check for events and act in accordance
                 # Restarting the game
                 if event.type == pygame.KEYDOWN:    
                     if event.key == pygame.K_SPACE:
                         eaten = False
                         enemies = pygame.sprite.Group()
-                        PERRY=perry.Perry('perry.png', INITIAL_X, INITIAL_Y, SPEED)
+                        PERRY = perry.Perry('perry.png', INITIAL_X, INITIAL_Y, SPEED)
                         last_pressed_1_perry = 'RIGHT'
                         last_pressed_2_perry = 'RIGHT'
                         
                 # Exiting the game
                 elif event.type == pygame.QUIT:
-                    running=False
+                    running = False
     # Keep playing (case no collision or enemy eaten)
     else:
         helper.draw_background(BACK,'grass4.png',(SIZE_X, SIZE_Y))
@@ -124,5 +124,3 @@ while running:
             enem.move()
             helper.draw_character(BACK,enem)
         pygame.display.flip()
-    
-
