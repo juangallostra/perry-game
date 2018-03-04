@@ -49,7 +49,7 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = random.choice([1,2])
         # Set direction
         m = float(self.target_y-self.y)/float(self.target_x-self.x)
-        while m>abs(1.73):
+        while m > abs(1.73):
             self.target_x = random.randrange(0,self.game_window_x-self.size[0])
             self.target_y = random.randrange(0,self.game_window_y-self.size[1])
             m = float(self.target_y-self.y)/float(self.target_x-self.x)
