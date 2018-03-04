@@ -43,25 +43,24 @@ class Perry(pygame.sprite.Sprite):
 
     # Methods for moving the player. Speed is 5 pixels/tic and both sprite and rectangle are moved
     def moveup(self):
-    	if self.y-self.speed>0:		
-    		self.y-=self.speed
-    		self.rect.y-=self.speed
+    	if self.y-self.speed > 0:		
+    		self.y -= self.speed
+    		self.rect.y -= self.speed
 
     def movedown(self):
-    	if self.y+self.speed+self.size[1]<640:
-    		self.y+=self.speed
-    		self.rect.y+=self.speed
+    	if self.y+self.speed+self.size[1] < 640:
+    		self.y += self.speed
+    		self.rect.y += self.speed
 
     def moveleft(self):
-    	if self.x-self.speed>0:
-    		self.x-=self.speed
-    		self.rect.x-=self.speed
+    	if self.x-self.speed > 0:
+    		self.x -= self.speed
+    		self.rect.x -= self.speed
 
     def moveright(self):
-    	if self.x+self.speed+self.size[0]<1152:
-    		self.x+=self.speed
-    		self.rect.x+=self.speed
+    	if self.x+self.speed+self.size[0] < 1152:
+    		self.x += self.speed
+    		self.rect.x += self.speed
 
     def flip(self):
          self.image = pygame.transform.flip(self.image, True, False)
-        

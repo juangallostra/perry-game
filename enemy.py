@@ -39,7 +39,7 @@ class Enemy(pygame.sprite.Sprite):
         self.last_dir_1 = 'RIGHT'
 
     # Redefine target, speed and direction
-    def target_dir_speed(self):
+    def redefine_target_dir_speed(self):
         # Restart counter
         self.counter = random.randint(0,120)
         # Redefine target
@@ -54,17 +54,20 @@ class Enemy(pygame.sprite.Sprite):
             self.target_y = random.randrange(0,self.game_window_y-self.size[1])
             m = float(self.target_y-self.y)/float(self.target_x-self.x)
 
-        self.direction = [float(self.target_x-self.x)/abs(self.target_x-self.x),(float(self.target_y-self.y)/abs(self.target_y-self.y))*m]
+        self.direction = [float(self.target_x-self.x)/abs(self.target_x-self.x),
+                         (float(self.target_y-self.y)/abs(self.target_y-self.y))*m]
 
     # Method for moving the enemy
     def move(self):
         # Check to see if enemy is on target and, if True, redefine movement parametres
-        if self.x in range(self.target_x-15,self.target_x+15) and self.y in range(self.target_y-15,self.target_y+15) or self.counter==0:
-            Enemy.target_dir_speed(self)
+        if self.x in range(self.target_x-15, self.target_x+15) and \
+        self.y in range(self.target_y-15, self.target_y+15) or \
+        self.counter==0:
+            self.redefine_target_dir_speed()
         # Else move
         else:
-            if 0<self.x+self.direction[0]*self.speed<1152-self.size[0]:
-                self.x+=self.direction[0]*self.speed
+            if 0 < self.x+self.direction[0]*self.speed < 1152-self.size[0]:
+                self.x += self.direction[0]*self.speed
                 self.rect.x = self.x
                 
                 # Update facing sprite direction
