@@ -59,12 +59,12 @@ class Enemy(pygame.sprite.Sprite):
 
     # Method for moving the enemy
     def move(self):
-        # Check to see if enemy is on target and, if True, redefine movement parametres
+        # First check to see if enemy is on target and, if True, redefine movement parametres
         if self.x in range(self.target_x-15, self.target_x+15) and \
         self.y in range(self.target_y-15, self.target_y+15) or \
-        self.counter==0:
+        self.counter == 0:
             self.redefine_target_dir_speed()
-        # Else move
+        # Else move the enemy according to its speed
         else:
             if 0 < self.x+self.direction[0]*self.speed < 1152-self.size[0]:
                 self.x += self.direction[0]*self.speed
