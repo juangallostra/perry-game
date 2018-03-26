@@ -1,4 +1,4 @@
-# perry_game
+# perry-game
 Simple game about eating smaller platypus and avoid being eaten by bigger ones.
 
 ## Requirements:
